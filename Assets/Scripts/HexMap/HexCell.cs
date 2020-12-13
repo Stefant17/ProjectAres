@@ -1,9 +1,20 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class HexCell : MonoBehaviour {
 
+	public int Distance {
+		get {
+			return distance;
+		}
+		set {
+			distance = value;
+			UpdateDistanceLabel();
+		}
+	}
+	int distance;
 	public HexCoordinates coordinates;
 
 	public RectTransform uiRect;
@@ -494,5 +505,9 @@ public class HexCell : MonoBehaviour {
 			if(HexRange.Contains(victimLocation)){return true;}
 			return false;
 		}
+	}
+	void UpdateDistanceLabel () {
+		Text label = uiRect.GetComponent<Text>();
+		label.text = distance == int.MaxValue ? "" : distance.ToString();
 	}
 }
